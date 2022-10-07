@@ -1,16 +1,15 @@
 import { Page } from "../components/Page";
-import { Gallery } from "../components/Gallery";
-import { StaticProps } from "../types/types";
 import { commonGetStaticProps } from "../services/commons";
+import { StaticProps } from "../types/types";
 
 export async function getStaticProps(args: StaticProps) {
   return commonGetStaticProps(args);
 }
 
-export default function Home() {
+export default function About() {
   return (
     <Page>
-      <Gallery />
+      <p>This site will help you find great clothes for great prices!</p>
     </Page>
   );
 }
