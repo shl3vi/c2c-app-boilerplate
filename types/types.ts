@@ -19,17 +19,21 @@ export interface Item {
   title: string;
   description: string;
   id: string;
-  images?: Image[];
+  images: Image[];
   price: {
     price: number;
     currency: string;
   };
 }
+export interface ItemDTO extends Omit<Item, "id">{
+  mainImage: Image;
+  images: Image[];
+}
 
 export interface CreateItemObj {
   title: string;
   description: string;
-  images?: any[];
+  images?: File[];
   price: {
     price: number;
     currency: string;

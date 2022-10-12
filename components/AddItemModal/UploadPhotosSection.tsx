@@ -3,20 +3,21 @@ import { Grid, Theme, useMediaQuery } from "@mui/material";
 import { DragAndDropArea } from "../DragAndDrop";
 import { UploadFilesButtonMobile } from "./UploadFilesButtonMobile";
 import { ImagesPreviewsContainer } from "./ImagesPreviewsContainer";
-import { useState } from "react";
-import { Image } from "../../types/types";
 
-export const UploadPhotosSection = () => {
-  const [uploadedImages, setUploadedImages] = useState<Image[]>([]);
+interface UploadPhotosSectionProps {
+  photos: File[];
+  setPhotos: (photos: File[]) => void;
+};
+
+export const UploadPhotosSection: React.FC<UploadPhotosSectionProps> = ({photos, setPhotos}) => {
   const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
 
+  const photoFilesToImages = () => {
+    return photos.map(p => ({ url: URL.createObjectURL(p)}))
+  }
+
   const handleFileAdded = (files: File[]) => {
-    console.log({ files });
-    setUploadedImages(
-      files.map((f) => ({
-        url: URL.createObjectURL(f),
-      }))
-    );
+    setPhotos(files);
   };
 
   return (
@@ -44,7 +45,7 @@ export const UploadPhotosSection = () => {
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             <ImagesPreviewsContainer
-              images={uploadedImages}
+              images={photoFilesToImages()}
               removeImage={() => {}}
             />
           </Grid>

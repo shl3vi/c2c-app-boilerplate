@@ -40,7 +40,7 @@ export const AddItemModal: React.FC<AddItemModalProps> = ({
             <Typography sx={{ textAlign: "center"}} variant="subtitle1">{t("addItem.title")}</Typography>
         </Toolbar>
         </AppBar>
-        <AddItemModalContent/>
+        <AddItemModalContent close={close}/>
         </Box>
       </Modal>
     </div>

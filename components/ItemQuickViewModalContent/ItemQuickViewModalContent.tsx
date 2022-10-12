@@ -22,19 +22,19 @@ interface ItemQuickViewModalContentProps extends ReactComponentProps {
   item: Item;
 }
 
-export const ItemQuickViewModalContent: React.FC<ItemQuickViewModalContentProps> =
-  observer(({ item }) => {
-    
-   return (
-      <Box sx={style}>
-        <Grid container spacing={2} direction={"row-reverse"}>
-          <Grid xs={12} sm={12} md={6} item>
-            <ItemQuickViewModalImageSection item={item} />
-          </Grid>
-          <Grid xs={12} sm={12} md={6} item>
-            <ItemQuickViewModalInfoSection item={item} />
-          </Grid>
+export const ItemQuickViewModalContent: React.FC<
+  ItemQuickViewModalContentProps
+> = ({ item }) => {
+  return (
+    <Box sx={style}>
+      <Grid container spacing={2} direction={"row-reverse"}>
+        <Grid xs={12} sm={12} md={6} item>
+          <ItemQuickViewModalImageSection item={item} />
         </Grid>
-      </Box>
-    );
-  });
+        <Grid xs={12} sm={12} md={6} item>
+          <ItemQuickViewModalInfoSection item={item} />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};

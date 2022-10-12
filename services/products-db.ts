@@ -1,4 +1,5 @@
 import { uuidv4 } from "@firebase/util";
+import { rejects } from "assert";
 import {
   collection,
   addDoc,
@@ -7,8 +8,9 @@ import {
   writeBatch,
   doc,
 } from "firebase/firestore";
-import { CreateItemObj, Item } from "../types/types";
-import { db } from "./firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { CreateItemObj, Item, ItemDTO } from "../types/types";
+import { db, storage } from "./firebase";
 
 export class ProductsDB {
   private collection;
@@ -16,15 +18,14 @@ export class ProductsDB {
     this.collection = collection(db, "products");
   }
 
-  public addProduct = (createItemObj: CreateItemObj, ownerId: string) => {
-    const item: Item = {
-      id: uuidv4(),
+  public addProduct = (createItemObj: Omit<CreateItemObj, "images"> & {images: {url : string}[]}, ownerId: string) => {
+    const item: ItemDTO = {
       ownerId,
       title: createItemObj.title,
       description: createItemObj.description,
       price: createItemObj.price,
-      mainImage: createItemObj.images ? createItemObj.images[0] : null,
-      images: createItemObj.images || []
+      mainImage: createItemObj.images[0],
+      images: createItemObj.images
     }
     return this.withErrorHandler(async () => {
       const docRef = await addDoc(this.collection, item);
@@ -44,7 +45,9 @@ export class ProductsDB {
     return this.withErrorHandler(async () => {
       const querySnapshot = await getDocs(this.collection);
       const products: Item[] = [];
-      querySnapshot.forEach((doc) => products.push(doc.data() as Item));
+      querySnapshot.forEach((doc) => {
+        products.push({...(doc.data() as Item), id: doc.id})}
+      );
       return products;
     }, "getProducts");
   };
@@ -59,6 +62,40 @@ export class ProductsDB {
       await batch.commit();
     }, "addProducts");
   };
+
+  public async handleUpload(file: File): Promise<string> {
+    if (!file) {
+        alert("Please choose a file first!")
+    }
+  
+    const storageRef = ref(storage,`/files/${file.name}`)
+    const uploadTask = uploadBytesResumable(storageRef, file);
+  
+    return new Promise<string>((resolve, 
+      ) => {
+      uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+              const percent = Math.round(
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+    
+              // update progress
+              console.log({percent});
+          },
+          (err) => {
+            console.log(err);
+            rejects(err as any);
+          },
+          () => {
+              // download url
+              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                  resolve(url)
+              });
+          }
+      ); 
+    })
+  }
 
   withErrorHandler = async (cb: () => Promise<any>, errorName: string) => {
     try {

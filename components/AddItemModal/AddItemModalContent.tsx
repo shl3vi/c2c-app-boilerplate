@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import {
@@ -9,28 +9,35 @@ import { UploadPhotosSection } from "./UploadPhotosSection";
 import { useTranslation } from "next-i18next";
 import { useAppStore } from "../../services/AppStoreProvider";
 
-export const AddItemModalContent = () => {
+interface AddItemModalContentProps {
+  close: () => void;
+}
+
+export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({close}) => {
   const [itemTitle, setItemTitle] = useState("");
   const [itemDescription, setItemDescription] = useState("");
-  const [itemPrice, setItemPrice] = useState<number>(null as any);
+  const [itemPrice, setItemPrice] = useState<number>(0);
+  const [photos, setPhotos] = useState<File[]>([]);
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const { t } = useTranslation("common");
   const appStore = useAppStore();
 
-  const onSubmit = () => {
-    appStore.createItem({
+  const onSubmit = async () => {
+    await appStore.createItem({
       title: itemTitle,
       description: itemDescription,
       price: {
         price: itemPrice,
         currency: '₪'
-      }
+      },
+      images: photos
     });
+    close();
   }
 
   useEffect(() => {
-    setSubmitDisabled((!itemTitle || !itemDescription || !itemPrice));
-  }, [itemTitle, itemDescription, itemPrice])
+    setSubmitDisabled((!itemTitle || !itemDescription || !itemPrice || !photos.length));
+  }, [itemTitle, itemDescription, itemPrice, photos])
 
   return (
     <>
@@ -74,7 +81,7 @@ export const AddItemModalContent = () => {
             />
           </Grid>
           <Grid xs={12} item container sx={{ marginTop: "20px" }}>
-            <UploadPhotosSection />
+            <UploadPhotosSection photos={photos} setPhotos={setPhotos}/>
           </Grid>
         </Grid>
             
