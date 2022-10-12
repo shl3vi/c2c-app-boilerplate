@@ -16,20 +16,30 @@ interface SwipeableTextMobileStepperProps {
   images: Image[];
 }
 
-const SwipeableTextMobileStepper: React.FC<SwipeableTextMobileStepperProps> = ({ images }) => {
-  const [isFullScreenViewOpen, setIsFullScreenViewOpen] = useState<boolean>(false);
+const SwipeableTextMobileStepper: React.FC<SwipeableTextMobileStepperProps> = ({
+  images,
+}) => {
+  const [isFullScreenViewOpen, setIsFullScreenViewOpen] =
+    useState<boolean>(false);
   const closeFullscreenView = () => {
     setIsFullScreenViewOpen(false);
-  }
+  };
 
   const openFullScreenView = () => {
     setIsFullScreenViewOpen(true);
-  }
+  };
 
   return (
     <Box>
-      <ImageSwipeableViews images={images} OnImageClicked={openFullScreenView}/>
-      <ItemImageViewFullScreen isOpen={isFullScreenViewOpen} close={closeFullscreenView} images={images}/>
+      <ImageSwipeableViews
+        images={images}
+        OnImageClicked={openFullScreenView}
+      />
+      <ItemImageViewFullScreen
+        isOpen={isFullScreenViewOpen}
+        close={closeFullscreenView}
+        images={images}
+      />
     </Box>
   );
 };

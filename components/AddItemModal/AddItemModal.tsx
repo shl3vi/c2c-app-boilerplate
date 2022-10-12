@@ -17,7 +17,7 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  overflow: 'auto',
+  overflow: "auto",
   p: 4,
 };
 
@@ -35,12 +35,14 @@ export const AddItemModal: React.FC<AddItemModalProps> = ({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-        <AppBar position="sticky">
-        <Toolbar>
-            <Typography sx={{ textAlign: "center"}} variant="subtitle1">{t("addItem.title")}</Typography>
-        </Toolbar>
-        </AppBar>
-        <AddItemModalContent close={close}/>
+          <AppBar position="sticky">
+            <Toolbar>
+              <Typography sx={{ textAlign: "center" }} variant="subtitle1">
+                {t("addItem.title")}
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <AddItemModalContent close={close} />
         </Box>
       </Modal>
     </div>

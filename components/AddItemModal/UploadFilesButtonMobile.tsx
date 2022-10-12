@@ -44,14 +44,19 @@ export const UploadFilesButtonMobile = ({
         onClick={onUploadClicked}
       >
         <PhotoCamera />
-        <Typography>{t("addItem.form.uploadPhotos.button.label.mobile")}</Typography>
+        <Typography>
+          {t("addItem.form.uploadPhotos.button.label.mobile")}
+        </Typography>
       </Button>
       {showError && (
         <Typography
           color={"red"}
           fontSize={"12px"}
           className="drag-n-drop-text"
-        >{t("addItem.form.uploadPhotos.validationError", {numOfPhotos: MAX_IMAGES_FOR_ITEM})}
+        >
+          {t("addItem.form.uploadPhotos.validationError", {
+            numOfPhotos: MAX_IMAGES_FOR_ITEM,
+          })}
         </Typography>
       )}
     </>

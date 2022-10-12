@@ -19,15 +19,20 @@ export class ProductsDB {
     this.collection = collection(db, "products");
   }
 
-  public addProduct = (createItemObj: Omit<CreateItemObj, "images"> & {images: {url : string}[]}, ownerId: string) => {
+  public addProduct = (
+    createItemObj: Omit<CreateItemObj, "images"> & {
+      images: { url: string }[];
+    },
+    ownerId: string
+  ) => {
     const item: ItemDTO = {
       ownerId,
       title: createItemObj.title,
       description: createItemObj.description,
       price: createItemObj.price,
       mainImage: createItemObj.images[0],
-      images: createItemObj.images
-    }
+      images: createItemObj.images,
+    };
     return this.withErrorHandler(async () => {
       const docRef = await addDoc(this.collection, item);
       console.log("Document written with ID: ", docRef.id);
@@ -47,8 +52,8 @@ export class ProductsDB {
       const querySnapshot = await getDocs(this.collection);
       const products: Item[] = [];
       querySnapshot.forEach((doc) => {
-        products.push({...(doc.data() as Item), id: doc.id})}
-      );
+        products.push({ ...(doc.data() as Item), id: doc.id });
+      });
       return products;
     }, "getProducts");
   };
@@ -66,36 +71,35 @@ export class ProductsDB {
 
   public async handleUpload(file: File): Promise<string> {
     if (!file) {
-        alert("Please choose a file first!")
+      alert("Please choose a file first!");
     }
-  const compressedImage = await compressImage(file);
-    const storageRef = ref(storage,`/files/${compressedImage.name}`)
+    const compressedImage = await compressImage(file);
+    const storageRef = ref(storage, `/files/${compressedImage.name}`);
     const uploadTask = uploadBytesResumable(storageRef, compressedImage);
-  
-    return new Promise<string>((resolve, 
-      ) => {
+
+    return new Promise<string>((resolve) => {
       uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-              const percent = Math.round(
-                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-              );
-    
-              // update progress
-              console.log({percent});
-          },
-          (err) => {
-            console.log(err);
-            rejects(err as any);
-          },
-          () => {
-              // download url
-              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                  resolve(url)
-              });
-          }
-      ); 
-    })
+        "state_changed",
+        (snapshot) => {
+          const percent = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+
+          // update progress
+          console.log({ percent });
+        },
+        (err) => {
+          console.log(err);
+          rejects(err as any);
+        },
+        () => {
+          // download url
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+            resolve(url);
+          });
+        }
+      );
+    });
   }
 
   withErrorHandler = async (cb: () => Promise<any>, errorName: string) => {

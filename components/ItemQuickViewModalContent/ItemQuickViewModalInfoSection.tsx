@@ -6,7 +6,9 @@ interface ItemQuickViewModalInfoSectionProps extends ReactComponentProps {
   item: Item;
 }
 
-export const ItemQuickViewModalInfoSection: React.FC<ItemQuickViewModalInfoSectionProps> = ({ item }) => {
+export const ItemQuickViewModalInfoSection: React.FC<
+  ItemQuickViewModalInfoSectionProps
+> = ({ item }) => {
   return (
     <Box>
       <Typography variant="h4" gutterBottom>

@@ -26,8 +26,8 @@ export const signInWithFB = async (): Promise<Nullable<User>> => {
     const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = FacebookAuthProvider.credentialFromError(error);
-    console.log('Error:', {errorCode, email, credential});
-    
+    console.log("Error:", { errorCode, email, credential });
+
     return null;
     // ...
   }
@@ -37,6 +37,8 @@ export const signOut = async (): Promise<void> => {
   await auth.signOut();
 };
 
-export const addAuthStateChangedListener = (listener: (user: Nullable<User>) => void): void => {
+export const addAuthStateChangedListener = (
+  listener: (user: Nullable<User>) => void
+): void => {
   auth.onAuthStateChanged(listener);
 };

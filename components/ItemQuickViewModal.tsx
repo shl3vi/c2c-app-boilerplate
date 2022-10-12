@@ -10,7 +10,11 @@ interface ItemQuickViewModalProps extends ReactComponentProps {
   itemId?: string;
 }
 
-export const ItemQuickViewModal: React.FC<ItemQuickViewModalProps> = ({ isOpen, close, itemId }) => {
+export const ItemQuickViewModal: React.FC<ItemQuickViewModalProps> = ({
+  isOpen,
+  close,
+  itemId,
+}) => {
   const [item, setItem] = useState<Nullable<Item>>(null);
 
   const store = useAppStore();
@@ -29,7 +33,7 @@ export const ItemQuickViewModal: React.FC<ItemQuickViewModalProps> = ({ isOpen, 
   const handleClose = () => {
     setItem(null);
     close();
-  }
+  };
 
   if (!item) {
     return <span>Loading</span>;
@@ -43,7 +47,13 @@ export const ItemQuickViewModal: React.FC<ItemQuickViewModalProps> = ({ isOpen, 
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        {(isOpen) ? <div><ItemQuickViewModalContent item={item as Item} /></div> : <></>}
+        {isOpen ? (
+          <div>
+            <ItemQuickViewModalContent item={item as Item} />
+          </div>
+        ) : (
+          <></>
+        )}
       </Modal>
     </div>
   );

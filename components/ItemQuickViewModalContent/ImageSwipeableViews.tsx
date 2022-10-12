@@ -39,29 +39,30 @@ export const ImageSwipeableViews: React.FC<ImageSwipeableViewsProps> = ({
       >
         {images.map((step, index) => {
           return (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-            key={step.url}
-          >
-            {Math.abs(activeStep - index) <= 2 ? (
-              <Box
-                component="img"
-                sx={{
-                  height: 255,
-                  display: "block",
-                  overflow: "hidden",
-                  objectFit: "contain",
-                }}
-                src={step.url}
-                alt={step.alt}
-                onClick={openFullScreenView}
-              />
-            ) : null}
-          </Box>
-        )})}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+              key={step.url}
+            >
+              {Math.abs(activeStep - index) <= 2 ? (
+                <Box
+                  component="img"
+                  sx={{
+                    height: 255,
+                    display: "block",
+                    overflow: "hidden",
+                    objectFit: "contain",
+                  }}
+                  src={step.url}
+                  alt={step.alt}
+                  onClick={openFullScreenView}
+                />
+              ) : null}
+            </Box>
+          );
+        })}
       </SwipeableViews>
       <MobileStepper
         steps={maxSteps}

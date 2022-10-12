@@ -13,7 +13,7 @@ export const DragAndDropArea = ({
   const [showError, setShowError] = useState(false);
   const { t } = useTranslation("common");
   const containerId = "dropZone";
-  
+
   const onDragEnter = () => {
     document
       .getElementById(containerId)

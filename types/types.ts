@@ -9,8 +9,8 @@ export interface StaticProps {
 }
 
 export interface Image {
-    url: string;
-    alt?: string;
+  url: string;
+  alt?: string;
 }
 
 export interface Item {
@@ -25,7 +25,7 @@ export interface Item {
     currency: string;
   };
 }
-export interface ItemDTO extends Omit<Item, "id">{
+export interface ItemDTO extends Omit<Item, "id"> {
   mainImage: Image;
   images: Image[];
 }

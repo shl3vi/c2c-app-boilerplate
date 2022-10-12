@@ -51,7 +51,7 @@ const ImagePreview = ({
     <NextImage
       style={{ objectFit: "contain", width: "100%", height: "100%" }}
       width={20} // required but cant pass string
-      height={20}// required but cant pass string
+      height={20} // required but cant pass string
       alt={image.alt || "an item photo"}
       src={image.url}
     />

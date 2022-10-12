@@ -6,10 +6,16 @@ import { ReactComponentProps } from "../types/types";
 interface TempSideBarProps extends ReactComponentProps {
   isOpen: boolean;
   closeSideBar: (event: MouseEvent | KeyboardEvent) => void;
-  ContentComp: React.FC<{closeSideBar: (event: MouseEvent | KeyboardEvent) => void;}>;
+  ContentComp: React.FC<{
+    closeSideBar: (event: MouseEvent | KeyboardEvent) => void;
+  }>;
 }
 
-export const TempSideBar: React.FC<TempSideBarProps> = ({ ContentComp, closeSideBar, isOpen }) => {
+export const TempSideBar: React.FC<TempSideBarProps> = ({
+  ContentComp,
+  closeSideBar,
+  isOpen,
+}) => {
   const router = useRouter();
 
   const isRTL = router.locale === "he";

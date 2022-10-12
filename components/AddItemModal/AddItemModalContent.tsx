@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import {
-  Button,
-  Grid,
-} from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { UploadPhotosSection } from "./UploadPhotosSection";
 import { useTranslation } from "next-i18next";
 import { useAppStore } from "../../services/AppStoreProvider";
@@ -13,7 +10,9 @@ interface AddItemModalContentProps {
   close: () => void;
 }
 
-export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({close}) => {
+export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({
+  close,
+}) => {
   const [itemTitle, setItemTitle] = useState("");
   const [itemDescription, setItemDescription] = useState("");
   const [itemPrice, setItemPrice] = useState<number>(0);
@@ -28,20 +27,22 @@ export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({close})
       description: itemDescription,
       price: {
         price: itemPrice,
-        currency: '₪'
+        currency: "₪",
       },
-      images: photos
+      images: photos,
     });
     close();
-  }
+  };
 
   useEffect(() => {
-    setSubmitDisabled((!itemTitle || !itemDescription || !itemPrice || !photos.length));
-  }, [itemTitle, itemDescription, itemPrice, photos])
+    setSubmitDisabled(
+      !itemTitle || !itemDescription || !itemPrice || !photos.length
+    );
+  }, [itemTitle, itemDescription, itemPrice, photos]);
 
   return (
     <>
-    <Box sx={{ marginTop: "28px" }}>
+      <Box sx={{ marginTop: "28px" }}>
         <Grid container spacing={2}>
           <Grid xs={12} sm={6} item>
             <TextField
@@ -81,22 +82,22 @@ export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({close})
             />
           </Grid>
           <Grid xs={12} item container sx={{ marginTop: "20px" }}>
-            <UploadPhotosSection photos={photos} setPhotos={setPhotos}/>
+            <UploadPhotosSection photos={photos} setPhotos={setPhotos} />
           </Grid>
         </Grid>
-            
-    </Box>
-    <Button
-        sx={{ 
-        position: "absolute", bottom: "20px", left: "32px"
-      }}
+      </Box>
+      <Button
+        sx={{
+          position: "absolute",
+          bottom: "20px",
+          left: "32px",
+        }}
         variant="contained"
         onClick={onSubmit}
         disabled={submitDisabled}
       >
-        {t('addItem.form.submit.label')}
+        {t("addItem.form.submit.label")}
       </Button>
     </>
   );
 };
-

@@ -50,7 +50,11 @@ export const LangSelector = () => {
   );
 };
 
-const SelectButton = ({ onClick }: {onClick: (e: React.MouseEvent) => void}) => {
+const SelectButton = ({
+  onClick,
+}: {
+  onClick: (e: React.MouseEvent) => void;
+}) => {
   return (
     <IconButton
       onClick={onClick}
@@ -64,7 +68,11 @@ const SelectButton = ({ onClick }: {onClick: (e: React.MouseEvent) => void}) => 
   );
 };
 
-const LangsList = ({ onChangeLanguage }: {onChangeLanguage: (l: string) => void}) => {
+const LangsList = ({
+  onChangeLanguage,
+}: {
+  onChangeLanguage: (l: string) => void;
+}) => {
   return (
     <List>
       <ListItem disablePadding>

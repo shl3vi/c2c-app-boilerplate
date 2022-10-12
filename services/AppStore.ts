@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { action, makeAutoObservable} from "mobx";
+import { action, makeAutoObservable } from "mobx";
 import { CreateItemObj, Item, Nullable } from "../types/types";
 import { signInWithFB, addAuthStateChangedListener, signOut } from "./fbAuth";
 import { ProductsDB } from "./products-db";
@@ -7,7 +7,7 @@ import { ProductsDB } from "./products-db";
 export class AppStore {
   public currentUser: Nullable<User> = null;
   public items: Item[] = [];
-  public detailedItems: {[id: string] : Item} = {};
+  public detailedItems: { [id: string]: Item } = {};
   public productsDB = new ProductsDB();
 
   constructor() {
@@ -46,11 +46,16 @@ export class AppStore {
   }
 
   public async createItem(item: CreateItemObj) {
-    const urls = await Promise.all((item.images as File[]).map(f => this.productsDB.handleUpload(f)));
+    const urls = await Promise.all(
+      (item.images as File[]).map((f) => this.productsDB.handleUpload(f))
+    );
     // if (!this.currentUser) {
     //   alert('user is not logged in');
     //   return Promise.reject();
     // }
-    await this.productsDB.addProduct({...item, images: urls.map(url => ({url})) }, "djhfdjkfkjdfhd"/*(this.currentUser as User).uid*/);
+    await this.productsDB.addProduct(
+      { ...item, images: urls.map((url) => ({ url })) },
+      "djhfdjkfkjdfhd" /*(this.currentUser as User).uid*/
+    );
   }
 }

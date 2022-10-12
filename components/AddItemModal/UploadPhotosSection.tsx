@@ -7,14 +7,17 @@ import { ImagesPreviewsContainer } from "./ImagesPreviewsContainer";
 interface UploadPhotosSectionProps {
   photos: File[];
   setPhotos: (photos: File[]) => void;
-};
+}
 
-export const UploadPhotosSection: React.FC<UploadPhotosSectionProps> = ({photos, setPhotos}) => {
+export const UploadPhotosSection: React.FC<UploadPhotosSectionProps> = ({
+  photos,
+  setPhotos,
+}) => {
   const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
 
   const photoFilesToImages = () => {
-    return photos.map(p => ({ url: URL.createObjectURL(p)}))
-  }
+    return photos.map((p) => ({ url: URL.createObjectURL(p) }));
+  };
 
   const handleFileAdded = (files: File[]) => {
     setPhotos(files);

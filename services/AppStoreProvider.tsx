@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 import { Nullable, ReactComponentProps } from "../types/types";
 import { AppStore } from "./AppStore";
 
-export interface AppStoreStoreProviderProps extends ReactComponentProps{
+export interface AppStoreStoreProviderProps extends ReactComponentProps {
   appStore: AppStore;
 }
 
