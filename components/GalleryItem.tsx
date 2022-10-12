@@ -22,11 +22,7 @@ export const GalleryItem: React.FC<GalleryItemProps> = ({ item, onClick }) => {
       />
       <ImageListItemBar
         title={item.title}
-        subtitle={
-          <Typography noWrap>
-            {item.description}
-          </Typography>
-        }
+        subtitle={<Typography noWrap>{item.description}</Typography>}
         actionPosition={isRTL ? "left" : "right"}
       />
     </ImageListItem>

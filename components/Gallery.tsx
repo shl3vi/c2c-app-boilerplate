@@ -14,20 +14,25 @@ export const Gallery = observer(() => {
   const store = useAppStore();
   const { t } = useTranslation("common");
   const [isFiltersSideBarOpen, setIsFiltersSideBarOpen] = useState(false);
-  const [itemQuickViewProps, setItemQuickViewProps] = useState<{open: boolean; itemId?: string}>({
+  const [itemQuickViewProps, setItemQuickViewProps] = useState<{
+    open: boolean;
+    itemId?: string;
+  }>({
     open: false,
   });
 
-  const toggleDrawer = (open: boolean) => (event: MouseEvent | KeyboardEvent) => {
-    if (
-      event.type === "keydown" &&
-      ((event as KeyboardEvent).key === "Tab" || (event as KeyboardEvent).key === "Shift")
-    ) {
-      return;
-    }
+  const toggleDrawer =
+    (open: boolean) => (event: MouseEvent | KeyboardEvent) => {
+      if (
+        event.type === "keydown" &&
+        ((event as KeyboardEvent).key === "Tab" ||
+          (event as KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
 
-    setIsFiltersSideBarOpen(open);
-  };
+      setIsFiltersSideBarOpen(open);
+    };
 
   const onGalleryItemClicked = (itemId: string) => {
     setItemQuickViewProps({

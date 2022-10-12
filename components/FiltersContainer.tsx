@@ -1,4 +1,4 @@
-import { MouseEvent, KeyboardEvent} from "react";
+import { MouseEvent, KeyboardEvent } from "react";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
@@ -13,7 +13,9 @@ interface FiltersContainerProps {
   closeSideBar: (event: MouseEvent | KeyboardEvent) => void;
 }
 
-export const FiltersContainer: React.FC<FiltersContainerProps> = ({ closeSideBar }) => {
+export const FiltersContainer: React.FC<FiltersContainerProps> = ({
+  closeSideBar,
+}) => {
   return (
     <Box sx={{ width: 250 }} role="presentation">
       <List>
