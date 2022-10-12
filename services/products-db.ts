@@ -11,6 +11,7 @@ import {
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { CreateItemObj, Item, ItemDTO } from "../types/types";
 import { db, storage } from "./firebase";
+import { compress as compressImage } from "./imageCompressor";
 
 export class ProductsDB {
   private collection;
@@ -67,9 +68,9 @@ export class ProductsDB {
     if (!file) {
         alert("Please choose a file first!")
     }
-  
-    const storageRef = ref(storage,`/files/${file.name}`)
-    const uploadTask = uploadBytesResumable(storageRef, file);
+  const compressedImage = await compressImage(file);
+    const storageRef = ref(storage,`/files/${compressedImage.name}`)
+    const uploadTask = uploadBytesResumable(storageRef, compressedImage);
   
     return new Promise<string>((resolve, 
       ) => {
