@@ -2,7 +2,17 @@
     "header.login": "Login",
     "gallery.filtersButton.label": "Filters",
     "menu.list.search": "Search",
+    "menu.list.myItems": "My Items",
     "menu.list.myAccount": "My Account",
     "menu.list.about": "About",
-    "menu.list.logout": "Logout"
+    "menu.list.logout": "Logout",
+    "myItems.openAddItemModalButton.label": "Add Item",
+    "addItem.title": "Add Item",
+    "addItem.form.itemTitle.label": "Item Title",
+    "addItem.form.itemDescription.label": "Item Description",
+    "addItem.form.itemPrice.label": "Item Price",
+    "addItem.form.submit.label": "Submit",
+    "addItem.form.uploadPhotos.button.label.mobile": "Upload Photos",
+    "addItem.form.uploadPhotos.dragNDrop.guidance": "Drag 'n' drop some files here, or click to select files",
+    "addItem.form.uploadPhotos.validationError": "Only Images Allowed. Max number of photos is {{numOfPhotos}}"
 }

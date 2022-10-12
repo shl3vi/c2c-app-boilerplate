@@ -39,6 +39,11 @@ export const MenuContent: React.FC<MenuContentProps> = observer(
             closeMenu={handleClose}
           />
           <MenuNavigationItem
+            label={t("menu.list.myItems")}
+            path={"/my-items"}
+            closeMenu={handleClose}
+          />
+          <MenuNavigationItem
             label={t("menu.list.about")}
             path={"/about"}
             closeMenu={handleClose}

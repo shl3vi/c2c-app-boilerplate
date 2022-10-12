@@ -1,6 +1,6 @@
 import { User } from "firebase/auth";
 import { action, makeAutoObservable} from "mobx";
-import { Item, Nullable } from "../types/types";
+import { CreateItemObj, Item, Nullable } from "../types/types";
 import { signInWithFB, addAuthStateChangedListener, signOut } from "./fbAuth";
 import { ProductsDB } from "./products-db";
 
@@ -43,5 +43,13 @@ export class AppStore {
 
   public setCurrentUser(user: Nullable<User>) {
     this.currentUser = user;
+  }
+
+  public async createItem(item: CreateItemObj) {
+    if (!this.currentUser) {
+      alert('user is not logged in');
+      return Promise.reject();
+    }
+    await this.productsDB.addProduct(item, this.currentUser.uid);
   }
 }

@@ -2,7 +2,17 @@
     "header.login": "התחבר",
     "gallery.filtersButton.label": "סינון תוצאות",
     "menu.list.search": "חיפוש",
+    "menu.list.myItems": "הפריטים שלי",
     "menu.list.myAccount": "החשבון שלי",
     "menu.list.about": "עלינו",
-    "menu.list.logout": "התנתק"
+    "menu.list.logout": "התנתק",
+    "myItems.openAddItemModalButton.label": "הוסף פריט",
+    "addItem.title": "הוסף פריט",
+    "addItem.form.itemTitle.label": "שם הפריט",
+    "addItem.form.itemDescription.label": "תיאור הפריט",
+    "addItem.form.itemPrice.label": "מחיר מבוקש",
+    "addItem.form.submit.label": "צור פריט",
+    "addItem.form.uploadPhotos.button.label.mobile": "העלאת תמונות",
+    "addItem.form.uploadPhotos.dragNDrop.guidance": "אפשר לגרור את התמונות לכאן או לחצו כדי לבחור",
+    "addItem.form.uploadPhotos.validationError": "ניתן להעלות רק קבצים מסוג תמונה. לא ניתן להעלות יותר מ{{numOfPhotos}} תמונות"
 }

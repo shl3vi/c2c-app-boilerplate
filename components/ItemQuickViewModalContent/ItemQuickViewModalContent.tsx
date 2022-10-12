@@ -1,11 +1,9 @@
 import { observer } from "mobx-react-lite";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { useEffect, useState } from "react";
-import { useAppStore } from "../../services/AppStoreProvider";
 import { ItemQuickViewModalImageSection } from "./ItemQuickViewModalImageSection";
 import { ItemQuickViewModalInfoSection } from "./ItemQuickViewModalInfoSection";
-import { Item, Nullable, ReactComponentProps } from "../../types/types";
+import { Item, ReactComponentProps } from "../../types/types";
 
 const style = {
   position: "absolute",
@@ -21,34 +19,19 @@ const style = {
 };
 
 interface ItemQuickViewModalContentProps extends ReactComponentProps {
-  itemId: string;
+  item: Item;
 }
 
 export const ItemQuickViewModalContent: React.FC<ItemQuickViewModalContentProps> =
-  observer(({ itemId }) => {
-    const [item, setItem] = useState<Nullable<Item>>(null);
-    const store = useAppStore();
-
-    const fetchItem = async () => {
-      await store.fetchItem(itemId);
-      setItem(store.detailedItems[itemId]);
-    };
-
-    useEffect(() => {
-      fetchItem();
-    }, []);
-
-    if (!item) {
-      return <span>Loading</span>;
-    }
-
-    return (
+  observer(({ item }) => {
+    
+   return (
       <Box sx={style}>
-        <Grid container spacing={2} direction={"rtl" as any}>
-          <Grid xs={6} sx={{ background: "red" }}>
+        <Grid container spacing={2} direction={"row-reverse"}>
+          <Grid xs={12} sm={12} md={6} item>
             <ItemQuickViewModalImageSection item={item} />
           </Grid>
-          <Grid xs={6}>
+          <Grid xs={12} sm={12} md={6} item>
             <ItemQuickViewModalInfoSection item={item} />
           </Grid>
         </Grid>

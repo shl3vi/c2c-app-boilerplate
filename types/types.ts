@@ -19,7 +19,17 @@ export interface Item {
   title: string;
   description: string;
   id: string;
-  images: Image[];
+  images?: Image[];
+  price: {
+    price: number;
+    currency: string;
+  };
+}
+
+export interface CreateItemObj {
+  title: string;
+  description: string;
+  images?: any[];
   price: {
     price: number;
     currency: string;

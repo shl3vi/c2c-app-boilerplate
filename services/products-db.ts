@@ -1,3 +1,4 @@
+import { uuidv4 } from "@firebase/util";
 import {
   collection,
   addDoc,
@@ -6,7 +7,7 @@ import {
   writeBatch,
   doc,
 } from "firebase/firestore";
-import { Item } from "../types/types";
+import { CreateItemObj, Item } from "../types/types";
 import { db } from "./firebase";
 
 export class ProductsDB {
@@ -15,9 +16,18 @@ export class ProductsDB {
     this.collection = collection(db, "products");
   }
 
-  public addProduct = (product: Item) => {
+  public addProduct = (createItemObj: CreateItemObj, ownerId: string) => {
+    const item: Item = {
+      id: uuidv4(),
+      ownerId,
+      title: createItemObj.title,
+      description: createItemObj.description,
+      price: createItemObj.price,
+      mainImage: createItemObj.images ? createItemObj.images[0] : null,
+      images: createItemObj.images || []
+    }
     return this.withErrorHandler(async () => {
-      const docRef = await addDoc(this.collection, product);
+      const docRef = await addDoc(this.collection, item);
       console.log("Document written with ID: ", docRef.id);
     }, "addProduct");
   };

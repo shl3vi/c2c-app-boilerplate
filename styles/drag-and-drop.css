@@ -1,0 +1,27 @@
+.drag-n-drop-container {
+  border: solid 1px #1976d2;
+  height: 100%;
+}
+
+.drag-n-drop-container-dragenter {
+  border: solid 1px #1976d2;
+  height: 100%;
+  background-color: lightgray;
+}
+
+.drag-n-drop-container-dragenter * {
+  pointer-events: none;
+}
+
+.drag-n-drop-container,
+.drag-n-drop-content {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drag-n-drop-text {
+  padding: 0 25px 0 25px;
+  text-align: center;
+}

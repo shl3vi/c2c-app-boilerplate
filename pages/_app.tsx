@@ -11,6 +11,7 @@ import { AppStoreStoreProvider } from "../services/AppStoreProvider";
 import { AppStore } from "../services/AppStore";
 import { observer } from "mobx-react-lite";
 import "../styles/globals.css";
+import "../styles/drag-and-drop.css";
 import "../styles/page.css";
 import Head from "next/head";
 
