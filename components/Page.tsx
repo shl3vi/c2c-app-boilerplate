@@ -44,9 +44,16 @@ export const Page: React.FC<PageProps> = ({ children }) => {
 };
 
 const HeaderUserLoginSection = observer(() => {
+  const router = useRouter();
   const store = useAppStore();
   if (!!store.currentUser) {
-    return <AccountCircleIcon fontSize="large" />;
+    return (
+      <AccountCircleIcon
+        fontSize="large"
+        sx={{ cursor: "pointer" }}
+        onClick={() => router.push("/my-account")}
+      />
+    );
   }
   return <LoginButton />;
 });
