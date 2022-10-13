@@ -8,9 +8,5 @@ export async function getStaticProps(args: StaticProps) {
 }
 
 export default function Home() {
-  return (
-    <Page>
-      <Gallery />
-    </Page>
-  );
+  return <Gallery />;
 }

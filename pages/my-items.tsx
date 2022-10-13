@@ -26,7 +26,7 @@ export default function MyItems() {
   }, []);
 
   return (
-    <Page>
+    <>
       <Button
         sx={{ marginTop: "20px" }}
         variant="contained"
@@ -38,6 +38,6 @@ export default function MyItems() {
         isOpen={isAddItemModalOpen}
         close={() => setIsAddItemModalOpen(false)}
       />
-    </Page>
+    </>
   );
 }

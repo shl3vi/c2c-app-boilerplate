@@ -10,6 +10,7 @@ import { LangSelector } from "../components/LangSelector";
 import { useAppStore } from "../services/AppStoreProvider";
 import { MenuIconButton } from "./Menu/MenuIconButton";
 import { ReactComponentProps } from "../types/types";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 interface PageProps extends ReactComponentProps {}
 
@@ -32,7 +33,7 @@ export const Page: React.FC<PageProps> = ({ children }) => {
             onClick={navigateSearchPage}
             sx={{ flexGrow: 1, textAlign: "center", cursor: "pointer" }}
           >
-            FashionXChange
+            WXChange
           </Typography>
           <HeaderUserLoginSection />
         </Toolbar>
@@ -45,7 +46,7 @@ export const Page: React.FC<PageProps> = ({ children }) => {
 const HeaderUserLoginSection = observer(() => {
   const store = useAppStore();
   if (!!store.currentUser) {
-    return <Button color="inherit">{store.currentUser.displayName}</Button>;
+    return <AccountCircleIcon fontSize="large" />;
   }
   return <LoginButton />;
 });

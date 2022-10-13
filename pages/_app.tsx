@@ -13,6 +13,7 @@ import { observer } from "mobx-react-lite";
 import "../styles/globals.css";
 import "../styles/drag-and-drop.css";
 import "../styles/page.css";
+import { Page } from "../components/Page";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const appStore = useRef(new AppStore());
@@ -46,7 +47,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AppStoreStoreProvider appStore={appStore.current}>
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <Page>
+          <Component {...pageProps} />
+        </Page>
       </ThemeProvider>
     </AppStoreStoreProvider>
   );

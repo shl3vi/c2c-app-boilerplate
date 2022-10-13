@@ -37,11 +37,13 @@ export const MenuContent: React.FC<MenuContentProps> = observer(
             label={t("menu.list.myAccount")}
             path={"/my-account"}
             closeMenu={handleClose}
+            forLoggedInUsers
           />
           <MenuNavigationItem
             label={t("menu.list.myItems")}
             path={"/my-items"}
             closeMenu={handleClose}
+            forLoggedInUsers
           />
           <MenuNavigationItem
             label={t("menu.list.about")}
@@ -53,6 +55,7 @@ export const MenuContent: React.FC<MenuContentProps> = observer(
             path={"/"}
             sideEffects={() => store.signOut()}
             closeMenu={handleClose}
+            forLoggedInUsers
           />
         </Menu>
       </div>
@@ -65,24 +68,36 @@ interface MenuNavigationItemProps {
   path: string;
   sideEffects?: () => void;
   closeMenu: () => void;
+  forLoggedInUsers?: boolean;
 }
 
-const MenuNavigationItem: React.FC<MenuNavigationItemProps> = (
-  { label, path, sideEffects = () => {}, closeMenu },
-) => {
-  const router = useRouter();
+const MenuNavigationItem: React.FC<MenuNavigationItemProps> = observer(
+  ({
+    label,
+    path,
+    sideEffects = () => {},
+    closeMenu,
+    forLoggedInUsers = false,
+  }) => {
+    const router = useRouter();
+    const appStore = useAppStore();
 
-  const navigateToGivenPath = () => router.push(path);
+    const navigateToGivenPath = () => router.push(path);
 
-  return (
-    <MenuItem
-      onClick={async () => {
-        await sideEffects();
-        closeMenu();
-        navigateToGivenPath();
-      }}
-    >
-      {label}
-    </MenuItem>
-  );
-};
+    if (forLoggedInUsers && !appStore.currentUser) {
+      return null;
+    }
+
+    return (
+      <MenuItem
+        onClick={async () => {
+          await sideEffects();
+          closeMenu();
+          navigateToGivenPath();
+        }}
+      >
+        {label}
+      </MenuItem>
+    );
+  }
+);

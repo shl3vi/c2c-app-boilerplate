@@ -7,9 +7,5 @@ export async function getStaticProps(args: StaticProps) {
 }
 
 export default function MyAccount() {
-  return (
-    <Page>
-      <span>My Account</span>
-    </Page>
-  );
+  return <span>My Account</span>;
 }
