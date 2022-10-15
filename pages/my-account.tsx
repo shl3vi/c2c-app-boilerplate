@@ -1,4 +1,3 @@
-import { Page } from "../components/Page";
 import { commonGetStaticProps } from "../services/commons";
 import { StaticProps } from "../types/types";
 

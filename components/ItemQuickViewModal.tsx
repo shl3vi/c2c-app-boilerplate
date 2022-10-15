@@ -35,10 +35,6 @@ export const ItemQuickViewModal: React.FC<ItemQuickViewModalProps> = ({
     close();
   };
 
-  if (!item) {
-    return <span>Loading</span>;
-  }
-
   return (
     <div>
       <Modal
@@ -49,7 +45,7 @@ export const ItemQuickViewModal: React.FC<ItemQuickViewModalProps> = ({
       >
         {isOpen ? (
           <div>
-            <ItemQuickViewModalContent item={item as Item} />
+            {!item ? null : <ItemQuickViewModalContent item={item as Item} />}
           </div>
         ) : (
           <></>
