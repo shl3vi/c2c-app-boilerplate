@@ -44,7 +44,9 @@ export default function MyItems() {
         {myItems.length ? (
           <MyItemsTable items={myItems} />
         ) : (
-          <Typography marginTop={"15px"}>No items were added.</Typography>
+          <Typography marginTop={"15px"}>
+            {t("myItems.emptyState.message")}
+          </Typography>
         )}
       </Box>
     </>

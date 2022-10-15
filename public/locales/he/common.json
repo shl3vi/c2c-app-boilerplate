@@ -7,6 +7,7 @@
   "menu.list.about": "עלינו",
   "menu.list.logout": "התנתק",
   "myItems.openAddItemModalButton.label": "הוסף פריט",
+  "myItems.emptyState.message": "עדיין לא הוספת פריטים.",
   "myItems.table.columnHeader.title": "כותרת",
   "myItems.table.columnHeader.description": "תיאור",
   "myItems.table.columnHeader.price": "מחיר",
