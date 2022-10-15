@@ -1,11 +1,12 @@
-import { Button } from "@mui/material";
+import { Button, Divider, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AddItemModal } from "../components/AddItemModal/AddItemModal";
-import { Page } from "../components/Page";
+import { MyItemsTable } from "../components/MyItemsTable";
+import { useAppStore } from "../services/AppStoreProvider";
 import { commonGetStaticProps } from "../services/commons";
-import { StaticProps } from "../types/types";
+import { Item, StaticProps } from "../types/types";
 
 export async function getStaticProps(args: StaticProps) {
   return commonGetStaticProps(args);
@@ -13,7 +14,8 @@ export async function getStaticProps(args: StaticProps) {
 
 export default function MyItems() {
   const { t } = useTranslation("common");
-  const router = useRouter();
+  const appStore = useAppStore();
+  const [myItems, setMyItems] = useState<Item[]>([]);
 
   const [isAddItemModalOpen, setIsAddItemModalOpen] = useState<boolean>(false);
 
@@ -22,7 +24,7 @@ export default function MyItems() {
   };
 
   useEffect(() => {
-    router.query["openAddProduct"] === "true" && setIsAddItemModalOpen(true);
+    appStore.getUserItems().then((items) => setMyItems(items));
   }, []);
 
   return (
@@ -38,6 +40,13 @@ export default function MyItems() {
         isOpen={isAddItemModalOpen}
         close={() => setIsAddItemModalOpen(false)}
       />
+      <Box marginTop="20px">
+        {myItems.length ? (
+          <MyItemsTable items={myItems} />
+        ) : (
+          <Typography marginTop={"15px"}>No items were added.</Typography>
+        )}
+      </Box>
     </>
   );
 }

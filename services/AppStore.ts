@@ -45,6 +45,10 @@ export class AppStore {
     this.currentUser = user;
   }
 
+  public async getUserItems(): Promise<Item[]> {
+    return this.productsDB.getUserProducts((this.currentUser as User).uid);
+  }
+
   public async createItem(item: CreateItemObj) {
     const urls = await Promise.all(
       (item.images as File[]).map((f) => this.productsDB.handleUpload(f))

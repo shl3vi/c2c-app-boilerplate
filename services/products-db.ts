@@ -1,4 +1,3 @@
-import { uuidv4 } from "@firebase/util";
 import { rejects } from "assert";
 import {
   collection,
@@ -7,6 +6,8 @@ import {
   getDoc,
   writeBatch,
   doc,
+  where,
+  query,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { CreateItemObj, Item, ItemDTO } from "../types/types";
@@ -56,6 +57,18 @@ export class ProductsDB {
       });
       return products;
     }, "getProducts");
+  };
+
+  public getUserProducts = async (userId: string): Promise<Item[]> => {
+    const q = query(collection(db, "products"), where("ownerId", "==", userId));
+    const querySnapshot = await getDocs(q);
+    const items: Item[] = [];
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      items.push({ id: doc.id, ...doc.data() } as Item);
+    });
+    return items;
   };
 
   public addProducts = (productsToAdd: Item[]) => {
