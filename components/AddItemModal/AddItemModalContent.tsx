@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, styled } from "@mui/material";
 import { UploadPhotosSection } from "./UploadPhotosSection";
 import { useTranslation } from "next-i18next";
 import { useAppStore } from "../../services/AppStoreProvider";
+import { useRouter } from "next/router";
 
 interface AddItemModalContentProps {
   close: () => void;
@@ -13,9 +14,12 @@ interface AddItemModalContentProps {
 export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({
   close,
 }) => {
+  const router = useRouter();
+  const isRTL = router.locale === "he";
   const [itemTitle, setItemTitle] = useState("");
   const [itemDescription, setItemDescription] = useState("");
-  const [itemPrice, setItemPrice] = useState<number>(0);
+  const [itemSize, setItemSize] = useState("");
+  const [itemPrice, setItemPrice] = useState<number>("" as unknown as number);
   const [photos, setPhotos] = useState<File[]>([]);
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const { t } = useTranslation("common");
@@ -40,12 +44,21 @@ export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({
     );
   }, [itemTitle, itemDescription, itemPrice, photos]);
 
+  const Input = isRTL
+    ? styled(TextField)({
+        "& label": {
+          transformOrigin: "right !important",
+          left: "inherit !important",
+        },
+      })
+    : TextField;
+
   return (
     <>
       <Box sx={{ marginTop: "28px" }}>
         <Grid container spacing={2}>
           <Grid xs={12} sm={6} item>
-            <TextField
+            <Input
               required
               id="item-title-input"
               label={t("addItem.form.itemTitle.label")}
@@ -55,11 +68,22 @@ export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({
               variant="standard"
             />
           </Grid>
-          <Grid xs={12} sm={6} item>
-            <TextField
+          <Grid xs={6} sm={3} item>
+            <Input
+              required
+              id="size-input"
+              label={t("addItem.form.itemSize.label")}
+              value={itemSize}
+              onChange={(e) => setItemSize(e.target.value)}
+              fullWidth
+              variant="standard"
+            />
+          </Grid>
+          <Grid xs={6} sm={3} item>
+            <Input
               required
               id="price-input"
-              label={t("addItem.form.itemPrice.label")}
+              label={`${t("addItem.form.itemPrice.label")} (₪)`}
               value={itemPrice}
               type="number"
               onChange={(e) => setItemPrice(Number(e.target.value))}
@@ -68,7 +92,7 @@ export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({
             />
           </Grid>
           <Grid xs={12} item>
-            <TextField
+            <Input
               required
               id="description-input"
               label={t("addItem.form.itemDescription.label")}

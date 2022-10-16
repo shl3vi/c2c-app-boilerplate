@@ -10,6 +10,7 @@
   "myItems.emptyState.message": "עדיין לא הוספת פריטים.",
   "myItems.table.columnHeader.title": "כותרת",
   "myItems.table.columnHeader.description": "תיאור",
+  "addItem.form.itemSize.label": "מידה",
   "myItems.table.columnHeader.price": "מחיר",
   "myItems.table.columnHeader.actions": "פעולות",
   "addItem.title": "הוסף פריט",

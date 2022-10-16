@@ -20,6 +20,9 @@ const nextConfig = withPWA({
       allowFutureImage: true,
     },
   },
+  images: {
+    domains: ["firebasestorage.googleapis.com"],
+  },
 });
 
 module.exports = nextConfig;
