@@ -29,6 +29,7 @@ export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({
     await appStore.createItem({
       title: itemTitle,
       description: itemDescription,
+      size: itemSize,
       price: {
         price: itemPrice,
         currency: "₪",
@@ -40,36 +41,36 @@ export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({
 
   useEffect(() => {
     setSubmitDisabled(
-      !itemTitle || !itemDescription || !itemPrice || !photos.length
+      !itemTitle ||
+        !itemDescription ||
+        !itemSize ||
+        !itemPrice ||
+        !photos.length
     );
   }, [itemTitle, itemDescription, itemPrice, photos]);
 
-  const Input = isRTL
-    ? styled(TextField)({
-        "& label": {
-          transformOrigin: "right !important",
-          left: "inherit !important",
-        },
-      })
-    : TextField;
+  const ResolvedTextField = isRTL ? RTLTextField : TextField;
 
   return (
     <>
       <Box sx={{ marginTop: "28px" }}>
         <Grid container spacing={2}>
           <Grid xs={12} sm={6} item>
-            <Input
+            <ResolvedTextField
               required
               id="item-title-input"
               label={t("addItem.form.itemTitle.label")}
               value={itemTitle}
-              onChange={(e) => setItemTitle(e.target.value)}
+              onChange={(e) => {
+                e.preventDefault();
+                setItemTitle(e.target.value);
+              }}
               fullWidth
               variant="standard"
             />
           </Grid>
           <Grid xs={6} sm={3} item>
-            <Input
+            <ResolvedTextField
               required
               id="size-input"
               label={t("addItem.form.itemSize.label")}
@@ -80,7 +81,7 @@ export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({
             />
           </Grid>
           <Grid xs={6} sm={3} item>
-            <Input
+            <ResolvedTextField
               required
               id="price-input"
               label={`${t("addItem.form.itemPrice.label")} (₪)`}
@@ -92,7 +93,7 @@ export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({
             />
           </Grid>
           <Grid xs={12} item>
-            <Input
+            <ResolvedTextField
               required
               id="description-input"
               label={t("addItem.form.itemDescription.label")}
@@ -125,3 +126,10 @@ export const AddItemModalContent: React.FC<AddItemModalContentProps> = ({
     </>
   );
 };
+
+const RTLTextField = styled(TextField)({
+  "& label": {
+    transformOrigin: "right !important",
+    left: "inherit !important",
+  },
+});

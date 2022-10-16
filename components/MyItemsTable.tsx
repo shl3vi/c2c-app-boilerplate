@@ -10,8 +10,8 @@ import { Item } from "../types/types";
 import Image from "next/image";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PriceCheckIcon from "@mui/icons-material/PriceCheck";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { useAppStore } from "../services/AppStoreProvider";
 
 interface MyItemsTableProps {
   items: Item[];
@@ -19,8 +19,7 @@ interface MyItemsTableProps {
 
 export const MyItemsTable: React.FC<MyItemsTableProps> = ({ items }) => {
   const { t } = useTranslation("common");
-  const router = useRouter();
-  const isRTL = router.locale === "he";
+  const { isRTL } = useAppStore();
 
   return (
     <TableContainer component={Paper}>
@@ -48,7 +47,7 @@ export const MyItemsTable: React.FC<MyItemsTableProps> = ({ items }) => {
               {t("myItems.table.columnHeader.price")}
             </TableCell>
             <TableCell align="center">
-              {t("myItems.table.columnHeader.actions")}
+              {`${t("myItems.table.columnHeader.actions")}`}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -88,8 +87,8 @@ export const MyItemsTable: React.FC<MyItemsTableProps> = ({ items }) => {
               </TableCell>
               <TableCell align="center">{item.price.price}</TableCell>
               <TableCell align="center">
-                <DeleteIcon color={"primary"} />
-                <PriceCheckIcon color={"primary"} />
+                <DeleteIcon sx={{ cursor: "pointer" }} color={"primary"} />
+                <PriceCheckIcon sx={{ cursor: "pointer" }} color={"primary"} />
               </TableCell>
             </TableRow>
           ))}

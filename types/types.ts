@@ -18,6 +18,7 @@ export interface Item {
   ownerId: string;
   title: string;
   description: string;
+  size: string;
   id: string;
   images: Image[];
   price: {
@@ -33,6 +34,7 @@ export interface ItemDTO extends Omit<Item, "id"> {
 export interface CreateItemObj {
   title: string;
   description: string;
+  size: string;
   images?: File[];
   price: {
     price: number;

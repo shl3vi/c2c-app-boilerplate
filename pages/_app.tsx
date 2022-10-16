@@ -16,12 +16,13 @@ import "../styles/page.css";
 import { Page } from "../components/Page";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const appStore = useRef(new AppStore());
+  const router = useRouter();
+  const isRTL = router.locale === "he";
+  const appStore = useRef(new AppStore({ isRTL }));
   const [readyState, setReadyState] = useState("not-ready");
   const [theme, setTheme] = useState(createTheme());
-  const router = useRouter();
 
-  const dir = router.locale === "he" ? "rtl" : "ltr";
+  const dir = isRTL ? "rtl" : "ltr";
   useEffect(() => {
     document.documentElement.dir = dir;
     setTheme(

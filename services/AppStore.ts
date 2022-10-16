@@ -9,8 +9,10 @@ export class AppStore {
   public items: Item[] = [];
   public detailedItems: { [id: string]: Item } = {};
   public productsDB = new ProductsDB();
+  public readonly isRTL;
 
-  constructor() {
+  constructor({ isRTL }: { isRTL: boolean }) {
+    this.isRTL = isRTL;
     makeAutoObservable(
       this,
       {

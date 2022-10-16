@@ -30,6 +30,7 @@ export class ProductsDB {
       ownerId,
       title: createItemObj.title,
       description: createItemObj.description,
+      size: createItemObj.size,
       price: createItemObj.price,
       mainImage: createItemObj.images[0],
       images: createItemObj.images,
