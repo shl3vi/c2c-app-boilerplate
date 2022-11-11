@@ -23,5 +23,9 @@
   "addItem.form.uploadPhotos.dragNDrop.guidance": "אפשר לגרור את התמונות לכאן או לחצו כדי לבחור",
   "addItem.form.uploadPhotos.validationError": "ניתן להעלות רק קבצים מסוג תמונה. לא ניתן להעלות יותר מ{{numOfPhotos}} תמונות",
   "aboutUs.title": "עלינו",
-  "aboutUs.message": "באתר זה תוכלו לתת חיים שניים לפרטי הלבוש שיושבים לכם בארון ללא שימוש. בין אם אלו קניות מחו״ל או שפגה תקופת ההחזר, צלמו העלו את הפריט והעבירו אותו הלאה. "
+  "aboutUs.message": "באתר זה תוכלו לתת חיים שניים לפרטי הלבוש שיושבים לכם בארון ללא שימוש. בין אם אלו קניות מחו״ל או שפגה תקופת ההחזר, צלמו העלו את הפריט והעבירו אותו הלאה. ",
+  "myAccount.contactInfo.title": "איך ניתן להשיג אותך",
+  "myAccount.contactInfo.facebook.placeholder": "לינק לפרופיל",
+  "myAccount.contactInfo.whatsapp.placeholder": "מספר הטלפון",
+  "myAccount.contactInfo.updateValue": "עדכן"
 }

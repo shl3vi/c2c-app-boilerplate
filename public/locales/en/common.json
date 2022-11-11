@@ -23,5 +23,9 @@
   "addItem.form.uploadPhotos.dragNDrop.guidance": "Drag 'n' drop some files here, or click to select files",
   "addItem.form.uploadPhotos.validationError": "Only Images Allowed. Max number of photos is {{numOfPhotos}}",
   "aboutUs.title": "About Us",
-  "aboutUs.message": "We wanted to create an alternative market for people to be able to trade wearables in good shape.\n This would help let the items get a second life and help the world to be a better place."
+  "aboutUs.message": "We wanted to create an alternative market for people to be able to trade wearables in good shape.\n This would help let the items get a second life and help the world to be a better place.",
+  "myAccount.contactInfo.title": "Ways to contact you",
+  "myAccount.contactInfo.facebook.placeholder": "Link to profile",
+  "myAccount.contactInfo.whatsapp.placeholder": "Phone No.",
+  "myAccount.contactInfo.updateValue": "Update"
 }

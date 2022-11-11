@@ -41,3 +41,16 @@ export interface CreateItemObj {
     currency: string;
   };
 }
+
+export type UserSettingsContactTypes = "facebook" | "whatsapp";
+
+export interface UserSettings {
+  _id: string;
+  uid: string;
+  contactInfo: {
+    [key in UserSettingsContactTypes]: {
+      enabled: boolean;
+      value?: string;
+    };
+  };
+}
